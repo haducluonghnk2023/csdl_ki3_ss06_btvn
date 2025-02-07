@@ -4,14 +4,7 @@ FROM Orders
 GROUP BY CustomerName, ProductName
 HAVING SUM(Quantity) > 1;
 -- cau 3
-SELECT CustomerName, OrderDate, Quantity
-FROM Orders
-WHERE OrderDate IN (
-    SELECT OrderDate
-    FROM Orders
-    GROUP BY OrderDate
-    HAVING SUM(Quantity) > 2
-);
+select customername, orderdate, quantity from orders where quantity > 2;
 -- cau 4
 SELECT CustomerName, OrderDate, SUM(Quantity * Price) AS TotalSpent
 FROM Orders
