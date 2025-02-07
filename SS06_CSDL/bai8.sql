@@ -44,3 +44,16 @@ JOIN courses c ON e.course_id = c.course_id
 GROUP BY c.course_id, c.course_name, c.duration, c.fee
 HAVING COUNT(e.student_id) > 2
 ORDER BY total_students DESC;
+-- cau 5
+select 
+	s.student_id,
+    s.name as student_name,
+    s.email,
+    sum(c.fee) as total_fee_paid,
+    count(e.course_id) as courses_count 
+from students s
+join enrollments e on s.student_id = e.student_id
+join courses c on e.course_id = c.course_id
+group by s.student_id, s.name, s.email
+having courses_count >= 2 
+and min(c.duration) > 30;
