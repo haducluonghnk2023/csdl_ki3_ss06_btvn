@@ -85,3 +85,15 @@ JOIN students s ON e.student_id = s.student_id
 JOIN courses c ON e.course_id = c.course_id
 ORDER BY
     fee_category ASC, student_name ASC;
+-- cau 4
+select 
+    c.course_name,
+    c.fee as course_fee,
+    count(e.student_id) as total_students,
+    sum(c.fee) as total_revenue 
+from courses c
+join enrollments e on c.course_id = e.course_id
+group by c.course_id, c.course_name, c.fee
+having total_students > 1
+order by total_students desc, total_revenue desc
+limit 10;
